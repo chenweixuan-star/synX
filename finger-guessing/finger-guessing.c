@@ -8,9 +8,9 @@ int main() {
     int user, computer;
     int user_wins=0,computer_wins=0;
     printf("猜拳游戏:0-石头,1-剪刀,2-布\n");
-    printf("三胜制,平局不计分。\n");
+    printf("两胜制,平局不计分。\n");
 
-    while(user_wins<3 && computer_wins<3){
+    while(user_wins<2 && computer_wins<2){
         printf("请输入你的选择(0/1/2):");
         scanf("%d",&user);
 
@@ -35,7 +35,7 @@ int main() {
             printf("你输了，当前比分%d:%d\n",user_wins,computer_wins);
         }
     }
-    if(user_wins==3){
+    if(user_wins==2){
         printf("恭喜你，获得最终胜利!\n");
     }else{
         printf("很遗憾，电脑获胜!\n");
