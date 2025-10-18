@@ -6,10 +6,14 @@
 int main() {
     srand(time(NULL));
     int user, computer;
-    printf("猜拳游戏开始！输入 0(剪刀) 1(石头) 2(布): ");
+    int user_wins=0,computer_wins=0;
+    printf("猜拳游戏:0-石头,1-剪刀,2-布\n");
+    printf("三胜制,平局不计分。\n");
 
-    while (1) {
-        scanf("%d", &user);
+    while(user_wins<3 && computer_wins<3){
+        printf("请输入你的选择(0/1/2):");
+        scanf("%d",&user);
+
         if (user < 0 || user > 2) {
             printf("输入无效，请输入 0, 1 或 2\n");
             continue;
@@ -17,20 +21,24 @@ int main() {
 
         computer = rand() % 3;
 
-        const char* choices[] = {"剪刀", "石头", "布"};
-        printf("你出: %s, 电脑出: %s\n", choices[user], choices[computer]);
+        printf("电脑出: %d\n",computer);
 
-        if ((user == 0 && computer == 2) ||
-            (user == 1 && computer == 0) ||
-            (user == 2 && computer == 1)) {
-            printf("你赢了！游戏结束。\n");
-            break;
+        if ((user == 0 && computer == 1) ||
+            (user == 1 && computer == 2) ||
+            (user == 2 && computer == 0)) {
+                user_wins++;
+                printf("你赢了！当前比分%d:%d\n",user_wins,computer_wins);
         } else if (user == computer) {
-            printf("平局，再来一次！\n");
+            printf("平局，不计分。\n");
         } else {
-            printf("你输了，继续！\n");
+            computer_wins++;
+            printf("你输了，当前比分%d:%d\n",user_wins,computer_wins);
         }
     }
-
+    if(user_wins==3){
+        printf("恭喜你，获得最终胜利!\n");
+    }else{
+        printf("很遗憾，电脑获胜!\n");
+    }
     return 0;
 }
